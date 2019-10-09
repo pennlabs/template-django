@@ -1,6 +1,6 @@
 # Django Template
 
-This folder contains all the sample configuration needed to create a fully functioning django app following all of Penn Labs' suggested configuration.
+This template repo contains all the sample configuration needed to create a fully functioning django app following all of Penn Labs' suggested configuration.
 
 # Installation
 In a new folder run `django-admin startproject <name of project>`, replacing `<name of project>` with the desired name for your project.
