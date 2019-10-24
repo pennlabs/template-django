@@ -1,4 +1,4 @@
-from pennlabs.settings.base import *
+from pennlabs.settings.base import * # noqa
 
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'

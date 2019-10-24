@@ -1,7 +1,9 @@
+import os
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-from pennlabs.settings.base import *
+from pennlabs.settings.base import DATABASES, * # noqa
 
 
 DEBUG = False
@@ -21,10 +23,3 @@ sentry_sdk.init(
     dsn=SENTRY_URL,
     integrations=[DjangoIntegration()]
 )
-
-# Labs Accounts Settings
-
-PLATFORM_ACCOUNTS = {
-    'REDIRECT_URI': 'https://example.pennlabs.org/accounts/callback/',
-    'ADMIN_PERMISSION': 'example_admin'
-}
