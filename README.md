@@ -2,7 +2,8 @@
 
 This template repo contains all the sample configuration needed to create a fully functioning django app following all of Penn Labs' suggested configuration.
 
-# Installation
+## Installation
+
 In a new folder run `django-admin startproject <name of project>`, replacing `<name of project>` with the desired name for your project.
 
 Run `cd <name of project>`, this folder is where you should run `git init` and configure git.
@@ -19,7 +20,8 @@ Edit `<name of project>/wsgi.py` and `manage.py` to replace `<name of project>.s
 
 Run `pipenv install -d` to install all packages needed
 
-# Features
+## Features
+
 * CircleCI:
   * Workflow to test, build, publish, and deploy your django project using contexts to keep secrets safe
 * Django
@@ -43,7 +45,8 @@ Run `pipenv install -d` to install all packages needed
   * Common dependencies pre-configured, split into regular and development packages
   * Testing, linting, code coverage, and uwsgi configuration
 
-# Configuration
+## Configuration
+
 This section will lay out all the changes that need to be performed to the template configuration to use with a new app.
 
 | File                    | Line | Description                                                                         |
