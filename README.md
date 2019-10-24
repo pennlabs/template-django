@@ -33,7 +33,7 @@ Run `pipenv install -d` to install all packages needed
       * Enable emoji support
       * Enable sentry reporting
       * Restrict `ALLOWED_HOSTS`
-      * Configure Penn Labs accounts
+  * Configure Penn Labs accounts (in production and development)
   * Renamed admin interface
 * Docker
   * .dockerignore file to prevent unnecessary files from being added to the docker image
@@ -56,12 +56,12 @@ This section will lay out all the changes that need to be performed to the templ
 | .circleci/config.yml    | 119  | Change example-deploy to the CircleCI context containing production secrets         |
 | settings/base.py        | 55   | In pennlabs.urls, change pennlabs to the name of your django project                |
 | settings/base.py        | 73   | In pennlabs.wsgi.application, change pennlabs to the name of your django project    |
+| settings/base.py        | 127  | Change example.pennlabs.org to the FQDN used in production                          |
+| settings/base.py        | 128  | Change example_admin to the admin tag desired from platform                         |
 | settings/ci.py          | 1    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/development.py | 1    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/production.py  | 4    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/production.py  | 16   | Change ALLOWED_HOSTS to reflect the FQDN used in production                         |
-| settings/production.py  | 28   | Change example.pennlabs.org to the FQDN used in production                          |
-| settings/production.py  | 29   | Change example_admin to the admin tag desired from platform                         |
+| settings/development.py | 3    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
+| settings/production.py  | 6    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
+| settings/production.py  | 18   | Change ALLOWED_HOSTS to reflect the FQDN used in production                         |
 | settings.cfg            | 9    | Change the modules on this line to the ones created in your django project          |
 | settings.cfg            | 21   | In pennlabs.wsgi:application, change pennlabs to the name of your django project    |
 | urls.py                 | 5    | Change Pennlabs Example Admin to a descriptive name of your django project          |
