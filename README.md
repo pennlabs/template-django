@@ -61,6 +61,7 @@ This section will lay out all the changes that need to be performed to the templ
 | settings/ci.py          | 1    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
 | settings/development.py | 3    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
 | settings/production.py  | 6    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
+| settings/staging.py     | 4    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
 | settings/production.py  | 18   | Change ALLOWED_HOSTS to reflect the FQDN used in production                         |
 | settings.cfg            | 9    | Change the modules on this line to the ones created in your django project          |
 | settings.cfg            | 21   | In pennlabs.wsgi:application, change pennlabs to the name of your django project    |
