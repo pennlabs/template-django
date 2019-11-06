@@ -32,7 +32,7 @@ jobs:
           name: Install dependencies
           command: |
             sudo pip install pipenv
-            pipenv install -d
+            pipenv install --deploy --dev
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -44,9 +44,12 @@ jobs:
           command: |
             pipenv run flake8 .
       - run:
-          name: Run tests & coverage
+          name: Run tests
           command: |
-            pipenv run coverage run manage.py test --settings=pennclubs.settings.ci
+            pipenv run coverage run manage.py test --settings=pennlabs.settings.ci
+      - run:
+          name: Run coverage
+          command: |
             pipenv run coveralls
       - store_test_results:
           path: test-results
@@ -72,7 +75,7 @@ workflows:
           requires:
             - test
           image: pennlabs/example-django
-          tag: "0.0.${CIRCLE_SHA1}"
+          tag: "${CIRCLE_SHA1}"
           context: docker-publish
       - deploy:
           requires:

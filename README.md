@@ -66,5 +66,6 @@ This section will lay out all the changes that need to be performed to the templ
 | settings.cfg            | 9    | Change the modules on this line to the ones created in your django project          |
 | settings.cfg            | 21   | In pennlabs.wsgi:application, change pennlabs to the name of your django project    |
 | urls.py                 | 5    | Change Pennlabs Example Admin to a descriptive name of your django project          |
+| k8s/values.yaml         | 5    | Change Pennlabs Example Admin to a descriptive name of your django project          |
 
 Also see [django-labs-accounts](https://github.com/pennlabs/django-labs-accounts) for configuration specific to Penn Labs accounts.
