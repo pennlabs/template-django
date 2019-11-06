@@ -48,7 +48,7 @@ jobs:
           command: |
             pipenv run coverage run manage.py test --settings=pennlabs.settings.ci
       - run:
-          name: Run coverage
+          name: Upload code coverage
           command: |
             pipenv run coveralls
       - store_test_results:
