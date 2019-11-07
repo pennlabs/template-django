@@ -1,10 +1,14 @@
 version: 2.1
-executors:
-  docker-publisher:
-    environment:
-      IMAGE_NAME: pennlabs/example-project
-    docker:
-      - image: circleci/buildpack-deps:buster
+orbs:
+  docker: circleci/docker@0.5.13
+
+branch-filters: &branch-filters
+  filters:
+    branches:
+      only:
+        - master
+        - staging
+
 jobs:
   test:
     working_directory: ~/pennlabs
@@ -20,11 +24,6 @@ jobs:
           MYSQL_DATABASE: circle_test
     steps:
       - checkout
-      - run:
-          name: "Pull Submodules"
-          command: |
-            git submodule init
-            git submodule update --remote
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
@@ -57,76 +56,29 @@ jobs:
       - store_artifacts:
           path: test-results
           destination: trl
-  build:
-    executor: docker-publisher
-    steps:
-      - checkout
-      - run:
-          name: "Pull Submodules"
-          command: |
-            git submodule init
-            git submodule update --remote
-      - setup_remote_docker
-      - run:
-          name: Build Docker image
-          command: |
-            docker build -t $IMAGE_NAME:latest .
-      - run:
-          name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
-  publish:
-    executor: docker-publisher
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - setup_remote_docker
-      - run:
-          name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
-      - run:
-          name: Publish Docker Image to Docker Hub
-          command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
-            docker push $IMAGE_NAME:latest
-            docker push $IMAGE_NAME:$IMAGE_TAG
   deploy:
     working_directory: ~/pennlabs
     docker:
-      - image: circleci/python:3.7
+      - image: pennlabs/labs-helm
     steps:
       - checkout
       - run:
-          name: Deploy to Docker host
-          command: |
-            echo "Coming soon"
+          name: Deploy to k8s
+          command: /deploy.sh
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - test
-      - build:
+      - docker/publish:
+          name: docker-publish
           requires:
             - test
-          filters:
-            branches:
-              only: master
-      - publish:
-          requires:
-            - build
+          image: pennlabs/example-django
+          tag: "${CIRCLE_SHA1}"
           context: docker-publish
-          filters:
-            branches:
-              only: master          
       - deploy:
           requires:
-            - publish
-          context: example-deploy
-          filters:
-            branches:
-              only: master
+            - docker-publish
+          context: k8s-deploy
+          <<: *branch-filters
