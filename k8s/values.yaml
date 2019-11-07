@@ -10,7 +10,7 @@ service:
 
 ingress:
   enabled: true
-  domain: example-django.upenn.club
+  domain: example.pennlabs.org
 
 secrets:
   secretEnv: example-django

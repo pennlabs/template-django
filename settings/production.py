@@ -30,7 +30,7 @@ sentry_sdk.init(
 # DO NOT USE IF DJANGO APP IS STANDALONE
 # Django CORS Settings
 CORS_ORIGIN_REGEX_WHITELIST = [
-    r'^https://[\w-]+.{}$'.format(FRONTEND_DOMAIN),
+    r'^https://www.{}$'.format(FRONTEND_DOMAIN),
     rf'^https://{}$'.format(FRONTEND_DOMAIN),
 ]
 
