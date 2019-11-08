@@ -13,4 +13,5 @@ ingress:
   domain: example.pennlabs.org
 
 secrets:
+  enabled: false
   secretEnv: example-django
