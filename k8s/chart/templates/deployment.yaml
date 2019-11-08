@@ -38,6 +38,3 @@ spec:
             - secretRef:
                 name: {{ .Values.secrets.secretEnv }}
 {{- end }}
-          envFrom:
-            - secretRef:
-                name: {{ .Values.secrets.secretEnv }}
