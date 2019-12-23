@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+{% verbatim %}apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-dep
@@ -28,13 +28,14 @@ spec:
               value: {{ if .Values.staging }}staging.{{ end }}{{ .Values.ingress.domain }}
 {{- if .Values.staging }}
             - name: DJANGO_SETTINGS_MODULE
-              value: pennlabs.settings.staging
+              value: {{ .Values.project_name }}.settings.staging
 {{- else }}
             - name: DJANGO_SETTINGS_MODULE
-              value: pennlabs.settings.production
+              value: {{ .Values.project_name }}.settings.production
 {{- end }}
 {{- if .Values.secrets.enabled }}
           envFrom:
             - secretRef:
                 name: {{ .Values.secrets.secretEnv }}
 {{- end }}
+{% endverbatim %}

@@ -1,0 +1,32 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@0.5.19
+  django-tools: pennlabs/django-tools@0.0.1
+  deploy: pennlabs/deploy@0.0.1
+
+branch-filters: &branch-filters
+  filters:
+    branches:
+      only:
+        - master
+        - staging
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - django-tools/check:
+          project-name: "{{ project_name }}"
+      - docker/publish:
+          requires:
+            - django-tools/check
+          cache_from: "pennlabs/{{ project_name }}:latest"
+          image: pennlabs/{{ project_name }}
+          tag: {% verbatim %}"${CIRCLE_SHA1},latest"{% endverbatim %}
+          context: docker-publish
+          <<: *branch-filters
+      - deploy/deploy:
+          requires:
+            - docker/publish
+          context: k8s-deploy
+          <<: *branch-filters

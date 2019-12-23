@@ -1,24 +1,16 @@
 # Django Template
 
-This template repo contains all the sample configuration needed to create a fully functioning django app following all of Penn Labs' suggested configuration.
+This template repo contains all the sample configuration needed to create a fully functioning django app 
+following all of Penn Labs's suggested configuration.
 
 ## Installation
+Make sure django is installed globally: `pip3 install --user django`
 
-In a new folder run `django-admin startproject <name of project>`, replacing `<name of project>` with the desired name for your project.
-
-Run `cd <name of project>`, this folder is where you should run `git init` and configure git.
-
-Copy everything from this folder in the templates repo to this folder.
-
-Copy urls.py to `<name of project>/urls.py`
-
-Delete `<name of project>/settings.py`
-
-Move the settings folder to `<name of project>/settings/`
-
-Edit `<name of project>/wsgi.py` and `manage.py` to replace `<name of project>.settings` with `<name of project>.settings.development`
-
-Run `pipenv install -d` to install all packages needed
+- `django-admin startproject --template=https://github.com/pennlabs/template-django/archive/master.zip --extension=py,cfg,yaml --name=Dockerfile <project name>`
+- `cd <project name>`
+- `pipenv install --dev` to install all packages needed
+- After creating apps, make sure to add them to `known_first_party` in `setup.cfg`.
+- `mv circleci .circleci` to enable continuous integration and deployment.
 
 ## Features
 
@@ -44,28 +36,5 @@ Run `pipenv install -d` to install all packages needed
 * Python
   * Common dependencies pre-configured, split into regular and development packages
   * Testing, linting, code coverage, and uwsgi configuration
-
-## Configuration
-
-This section will lay out all the changes that need to be performed to the template configuration to use with a new app.
-
-| File                    | Line | Description                                                                         |
-|-------------------------|------|-------------------------------------------------------------------------------------|
-| .circleci/config.yml    | 5    | Change pennlabs/example-project to the name of the new app to publish to docker hub |
-| .circleci/config.yml    | 45   | In pennlabs.settings.ci, change pennlabs to the name of your django project         |
-| .circleci/config.yml    | 119  | Change example-deploy to the CircleCI context containing production secrets         |
-| settings/base.py        | 55   | In pennlabs.urls, change pennlabs to the name of your django project                |
-| settings/base.py        | 73   | In pennlabs.wsgi.application, change pennlabs to the name of your django project    |
-| settings/base.py        | 127  | Change example.pennlabs.org to the FQDN used in production                          |
-| settings/base.py        | 128  | Change example_admin to the admin tag desired from platform                         |
-| settings/ci.py          | 1    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/development.py | 3    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/production.py  | 6    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/staging.py     | 4    | In pennlabs.settings.base, change pennlabs to the name of your django project       |
-| settings/production.py  | 18   | Change ALLOWED_HOSTS to reflect the FQDN used in production                         |
-| settings.cfg            | 9    | Change the modules on this line to the ones created in your django project          |
-| settings.cfg            | 21   | In pennlabs.wsgi:application, change pennlabs to the name of your django project    |
-| urls.py                 | 5    | Change Pennlabs Example Admin to a descriptive name of your django project          |
-| k8s/values.yaml         | 5    | Change Pennlabs Example Admin to a descriptive name of your django project          |
 
 Also see [django-labs-accounts](https://github.com/pennlabs/django-labs-accounts) for configuration specific to Penn Labs accounts.

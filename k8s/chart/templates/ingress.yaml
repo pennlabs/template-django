@@ -1,4 +1,4 @@
-{{- if .Values.ingress.enabled -}}
+{% verbatim %}{{- if .Values.ingress.enabled -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -16,3 +16,4 @@ spec:
           serviceName: {{ .Release.Name }}-svc
           servicePort: 80
 {{- end }}
+{% endverbatim %}

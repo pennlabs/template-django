@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: pennlabs/example-django
+  repository: pennlabs/{{ project_name }}
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -10,8 +10,10 @@ service:
 
 ingress:
   enabled: true
-  domain: example.pennlabs.org
+  domain: example.com
 
 secrets:
   enabled: false
-  secretEnv: example-django
+  secretEnv: {{ project_name }}
+
+project_name: {{ project_name }}

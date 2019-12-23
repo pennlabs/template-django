@@ -15,3 +15,5 @@ ingress:
 
 secrets:
   secretEnv: ""
+
+project_name: example.com
