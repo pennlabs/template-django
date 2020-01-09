@@ -6,8 +6,9 @@ applications:
     image: pennlabs/{{ project_name }}
     secret: {{ project_name }}
     ingress:
-      - host: example.com
-        paths: ["/"]
+      hosts:
+        - host: example.com
+          paths: ["/"]
     extraEnv:
       - name: BACKEND_DOMAIN
         value: example.com
