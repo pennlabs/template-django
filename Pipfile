@@ -5,7 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 codecov = "*"
-black = "*"
+black = "==19.10b0"
 unittest-xml-reporting = "*"
 flake8 = "*"
 flake8-isort = "*"
@@ -21,6 +21,7 @@ sentry-sdk = "*"
 django = "*"
 django-cors-headers = "*"
 pyyaml = "*"
+uritemplate = "*"
 uwsgi = "*"
 django-labs-accounts = "*"
 

@@ -12,7 +12,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path(
-        "openapi/", get_schema_view(title="{{ project_name }} Documentation"), name="openapi-schema"
+        "openapi/",
+        get_schema_view(title="{{ project_name }} Documentation", public=True),
+        name="openapi-schema",
     ),
     path(
         "documentation/",
@@ -24,4 +26,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns = [path("__debug__/", include("debug_toolbar.urls"))] + urlpatterns
+    import debug_toolbar
+
+    urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
