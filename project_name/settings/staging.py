@@ -4,8 +4,6 @@ from {{ project_name }}.settings.base import BACKEND_DOMAIN, PLATFORM_ACCOUNTS
 
 DEBUG = True
 
-PLATFORM_ACCOUNTS.update({"REDIRECT_URI": f"https://{BACKEND_DOMAIN}/accounts/callback/"})
-
 ###############################################################
 # SETTINGS TO ALLOW FRONTEND TO MAKE AJAX REQUESTS TO BACKEND #
 ###############################################################
