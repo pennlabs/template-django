@@ -15,8 +15,7 @@ import os
 import dj_database_url
 
 
-FRONTEND_DOMAIN = os.environ.get("FRONTEND_DOMAIN", "example.com")
-BACKEND_DOMAIN = os.environ.get("BACKEND_DOMAIN", "api.example.com")
+DOMAIN = os.environ.get("DOMAIN", "example.com")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -131,15 +130,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # DLA Settings
 
 PLATFORM_ACCOUNTS = {
-    "REDIRECT_URI": os.environ.get("LABS_REDIRECT_URI", "http://localhost:8000/accounts/callback/"),
+    "REDIRECT_URI": os.environ.get(
+        "LABS_REDIRECT_URI", "http://localhost:8000/accounts/callback/"
+    ),
     "CLIENT_ID": "clientid",
     "CLIENT_SECRET": "supersecretclientsecret",
     "PLATFORM_URL": "https://platform-dev.pennlabs.org",
     "CUSTOM_ADMIN": False,
 }
-
-
-# CORS Settings
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
