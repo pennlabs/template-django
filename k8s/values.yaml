@@ -1,10 +1,10 @@
-deploy_version: 0.1.8
+deploy_version: 0.1.15
 image_tag: latest
 
 applications:
   - name: django
-    image: pennlabs/{{ project_name }}
-    secret: {{ project_name }}
+    image: pennlabs/project_name
+    secret: project_name
     ingress:
       hosts:
         - host: example.com
@@ -13,4 +13,4 @@ applications:
       - name: DOMAIN
         value: example.com
       - name: DJANGO_SETTINGS_MODULE
-        value: {{ project_name }}.settings.production
+        value: project_name.settings.production
