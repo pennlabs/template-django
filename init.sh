@@ -11,7 +11,7 @@ find . -type f -exec sed -i "s/github-project/$2/g" {} \;
 rm README.md
 rm LICENSE
 
-django-admin startproject --template=https://github.com/pennlabs/labs-django-startproject/archive/master.zip --extension=py,cfg $1 .
+django-admin startproject --template=https://github.com/pennlabs/labs-django-startproject/archive/master.zip --extension=py,cfg --extension=py,cfg --name=Dockerfile $1 .
 
 mv README.md.template README.md
 
